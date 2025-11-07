@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "246672128053",
+    "project_id": "ai-agent-app-d4ba4",
+    "storage_bucket": "ai-agent-app-d4ba4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246672128053:android:042b585d3a02d5c4d3197c",
+        "android_client_info": {
+          "package_name": "com.example.food_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2L5XQEsB9lbXiSN83kOn_X5578b7dGEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
