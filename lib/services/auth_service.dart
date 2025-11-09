@@ -1,21 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:food_app/models/User.dart';
+import 'package:food_app/services/firestore_service.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirestoreService _firestore = FirestoreService(collectionPath: 'users', fromMap: (data, documentId) => null);
 
   // ---------------- Email & Password ----------------
 
-  Future<User?> signUpWithEmail(String email, String password) async {
+  Future<User?> signUpWithEmail(RegistrationUser user) async {
     try {
       final result = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: user.personalInfo.email,
+        password: user.personalInfo.password,
       );
+
+        await _firestore.addDocument(user.toJson(), docId: result.user?.uid);
+
       return result.user;
+
     } on FirebaseAuthException catch (e) {
       debugPrint('SignUp Error [${e.code}]: ${e.message}');
       return null;
+
     } catch (e) {
       debugPrint('SignUp Error: $e');
       return null;
@@ -110,6 +119,30 @@ class AuthService {
     } catch (e) {
       debugPrint('Verify OTP Error: $e');
       return null;
+    }
+  }
+
+  Future<bool> changePassword(String currentPassword, String newPassword) async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null || user.email == null) return false;
+
+      // Re-authenticate with current password
+      final credential = EmailAuthProvider.credential(
+        email: user.email!,
+        password: currentPassword,
+      );
+      await user.reauthenticateWithCredential(credential);
+
+      // Update password
+      await user.updatePassword(newPassword);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      debugPrint('Change Password Error [${e.code}]: ${e.message}');
+      return false;
+    } catch (e) {
+      debugPrint('Change Password Error: $e');
+      return false;
     }
   }
 

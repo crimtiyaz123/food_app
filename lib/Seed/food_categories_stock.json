@@ -1,0 +1,177 @@
+{
+  "Burger": [
+    {
+      "name": "Italian Burger",
+      "price": 100,
+      "quantity": 10,
+      "rating": 5,
+      "description": "Classic Italian burger with fresh veggies and cheese",
+      "imageUrl": "https://example.com/italian_burger.png",
+      "calories": 350,
+      "preparationTime": 15,
+      "isAvailable": true
+    },
+    {
+      "name": "Cheese Burger",
+      "price": 120,
+      "quantity": 8,
+      "rating": 4,
+      "description": "Juicy burger with extra cheese",
+      "imageUrl": "https://example.com/cheese_burger.png",
+      "calories": 400,
+      "preparationTime": 12,
+      "isAvailable": true
+    },
+    {
+      "name": "Classic Burger",
+      "price": 99,
+      "quantity": 15,
+      "rating": 4,
+      "description": "Beef patty with lettuce, tomato, and cheese",
+      "imageUrl": "https://example.com/images/classic_burger.png",
+      "calories": 380,
+      "preparationTime": 10,
+      "isAvailable": true
+    }
+  ],
+  "Pizza": [
+    {
+      "name": "Margherita Pizza",
+      "price": 12.99,
+      "quantity": 10,
+      "rating": 5,
+      "description": "Classic pizza with tomato sauce, mozzarella, and basil",
+      "imageUrl": "https://example.com/images/margherita.png",
+      "calories": 300,
+      "preparationTime": 15,
+      "isAvailable": true
+    },
+    {
+      "name": "Pepperoni Pizza",
+      "price": 14.99,
+      "quantity": 8,
+      "rating": 5,
+      "description": "Pizza topped with pepperoni and cheese",
+      "imageUrl": "https://example.com/images/pepperoni.png",
+      "calories": 350,
+      "preparationTime": 17,
+      "isAvailable": true
+    },
+    {
+      "name": "Vegetarian Pizza",
+      "price": 13.99,
+      "quantity": 12,
+      "rating": 4,
+      "description": "Pizza loaded with fresh vegetables",
+      "imageUrl": "https://example.com/images/vegetarian.png",
+      "calories": 320,
+      "preparationTime": 16,
+      "isAvailable": true
+    }
+  ],
+  "Sushi": [
+    {
+      "name": "California Roll",
+      "price": 8.99,
+      "quantity": 20,
+      "rating": 4,
+      "description": "Crab, avocado, and cucumber roll",
+      "imageUrl": "https://example.com/images/california_roll.png",
+      "calories": 200,
+      "preparationTime": 10,
+      "isAvailable": true
+    },
+    {
+      "name": "Salmon Nigiri",
+      "price": 7.99,
+      "quantity": 15,
+      "rating": 5,
+      "description": "Fresh salmon over seasoned rice",
+      "imageUrl": "https://example.com/images/salmon_nigiri.png",
+      "calories": 180,
+      "preparationTime": 8,
+      "isAvailable": true
+    },
+    {
+      "name": "Tuna Sashimi",
+      "price": 12.99,
+      "quantity": 10,
+      "rating": 5,
+      "description": "Thin slices of fresh tuna",
+      "imageUrl": "https://example.com/images/tuna_sashimi.png",
+      "calories": 150,
+      "preparationTime": 7,
+      "isAvailable": true
+    }
+  ],
+  "Desserts": [
+    {
+      "name": "Chocolate Cake",
+      "price": 6.99,
+      "quantity": 25,
+      "rating": 5,
+      "description": "Rich chocolate cake with frosting",
+      "imageUrl": "https://example.com/images/chocolate_cake.png",
+      "calories": 450,
+      "preparationTime": 5,
+      "isAvailable": true
+    },
+    {
+      "name": "Cheesecake",
+      "price": 7.99,
+      "quantity": 20,
+      "rating": 5,
+      "description": "Creamy cheesecake with berry topping",
+      "imageUrl": "https://example.com/images/cheesecake.png",
+      "calories": 400,
+      "preparationTime": 6,
+      "isAvailable": true
+    },
+    {
+      "name": "Ice Cream Sundae",
+      "price": 5.99,
+      "quantity": 30,
+      "rating": 4,
+      "description": "Vanilla ice cream with chocolate sauce",
+      "imageUrl": "https://example.com/images/ice_cream.png",
+      "calories": 350,
+      "preparationTime": 2,
+      "isAvailable": true
+    }
+  ],
+  "Drinks": [
+    {
+      "name": "Coca Cola",
+      "price": 2.99,
+      "quantity": 50,
+      "rating": 4,
+      "description": "Classic cola drink",
+      "imageUrl": "https://example.com/images/coke.png",
+      "calories": 150,
+      "preparationTime": 0,
+      "isAvailable": true
+    },
+    {
+      "name": "Orange Juice",
+      "price": 3.99,
+      "quantity": 40,
+      "rating": 5,
+      "description": "Freshly squeezed orange juice",
+      "imageUrl": "https://example.com/images/orange_juice.png",
+      "calories": 120,
+      "preparationTime": 0,
+      "isAvailable": true
+    },
+    {
+      "name": "Coffee",
+      "price": 2.49,
+      "quantity": 35,
+      "rating": 5,
+      "description": "Hot brewed coffee",
+      "imageUrl": "https://example.com/images/coffee.png",
+      "calories": 90,
+      "preparationTime": 5,
+      "isAvailable": true
+    }
+  ]
+}

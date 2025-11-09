@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Pizza",
+    "imageUrl": "https://example.com/images/pizza.png",
+    "description": "Delicious cheesy pizzas with various toppings.",
+    "products": [
+      {
+        "name": "Margherita Pizza",
+        "imageUrl": "https://example.com/images/margherita.png",
+        "description": "Classic pizza with tomato sauce, mozzarella, and basil.",
+        "price": 12.99
+      },
+      {
+        "name": "Pepperoni Pizza",
+        "imageUrl": "https://example.com/images/pepperoni.png",
+        "description": "Pizza topped with pepperoni and cheese.",
+        "price": 14.99
+      },
+      {
+        "name": "Vegetarian Pizza",
+        "imageUrl": "https://example.com/images/vegetarian.png",
+        "description": "Pizza loaded with fresh vegetables.",
+        "price": 13.99
+      }
+    ]
+  },
+  {
+    "name": "Burgers",
+    "imageUrl": "https://example.com/images/burger.png",
+    "description": "Juicy burgers made with fresh ingredients.",
+    "products": [
+      {
+        "name": "Classic Burger",
+        "imageUrl": "https://example.com/images/classic_burger.png",
+        "description": "Beef patty with lettuce, tomato, and cheese.",
+        "price": 9.99
+      },
+      {
+        "name": "Chicken Burger",
+        "imageUrl": "https://example.com/images/chicken_burger.png",
+        "description": "Grilled chicken patty with mayo and veggies.",
+        "price": 10.99
+      },
+      {
+        "name": "Veggie Burger",
+        "imageUrl": "https://example.com/images/veggie_burger.png",
+        "description": "Plant-based patty with fresh toppings.",
+        "price": 8.99
+      }
+    ]
+  },
+  {
+    "name": "Sushi",
+    "imageUrl": "https://example.com/images/sushi.png",
+    "description": "Fresh sushi rolls and sashimi.",
+    "products": [
+      {
+        "name": "California Roll",
+        "imageUrl": "https://example.com/images/california_roll.png",
+        "description": "Crab, avocado, and cucumber roll.",
+        "price": 8.99
+      },
+      {
+        "name": "Salmon Nigiri",
+        "imageUrl": "https://example.com/images/salmon_nigiri.png",
+        "description": "Fresh salmon over seasoned rice.",
+        "price": 7.99
+      },
+      {
+        "name": "Tuna Sashimi",
+        "imageUrl": "https://example.com/images/tuna_sashimi.png",
+        "description": "Thin slices of fresh tuna.",
+        "price": 12.99
+      }
+    ]
+  },
+  {
+    "name": "Desserts",
+    "imageUrl": "https://example.com/images/dessert.png",
+    "description": "Cakes, pastries, and sweet treats.",
+    "products": [
+      {
+        "name": "Chocolate Cake",
+        "imageUrl": "https://example.com/images/chocolate_cake.png",
+        "description": "Rich chocolate cake with frosting.",
+        "price": 6.99
+      },
+      {
+        "name": "Cheesecake",
+        "imageUrl": "https://example.com/images/cheesecake.png",
+        "description": "Creamy cheesecake with berry topping.",
+        "price": 7.99
+      },
+      {
+        "name": "Ice Cream Sundae",
+        "imageUrl": "https://example.com/images/ice_cream.png",
+        "description": "Vanilla ice cream with chocolate sauce.",
+        "price": 5.99
+      }
+    ]
+  },
+  {
+    "name": "Drinks",
+    "imageUrl": "https://example.com/images/drinks.png",
+    "description": "Refreshing soft drinks and beverages.",
+    "products": [
+      {
+        "name": "Coca Cola",
+        "imageUrl": "https://example.com/images/coke.png",
+        "description": "Classic cola drink.",
+        "price": 2.99
+      },
+      {
+        "name": "Orange Juice",
+        "imageUrl": "https://example.com/images/orange_juice.png",
+        "description": "Freshly squeezed orange juice.",
+        "price": 3.99
+      },
+      {
+        "name": "Coffee",
+        "imageUrl": "https://example.com/images/coffee.png",
+        "description": "Hot brewed coffee.",
+        "price": 2.49
+      }
+    ]
+  },
+  {
+    "name": "Salads",
+    "imageUrl": "https://example.com/images/salad.png",
+    "description": "Healthy and fresh salads.",
+    "products": [
+      {
+        "name": "Caesar Salad",
+        "imageUrl": "https://example.com/images/caesar_salad.png",
+        "description": "Romaine lettuce with Caesar dressing.",
+        "price": 8.99
+      },
+      {
+        "name": "Greek Salad",
+        "imageUrl": "https://example.com/images/greek_salad.png",
+        "description": "Mixed greens with feta and olives.",
+        "price": 9.99
+      },
+      {
+        "name": "Fruit Salad",
+        "imageUrl": "https://example.com/images/fruit_salad.png",
+        "description": "Fresh seasonal fruits.",
+        "price": 6.99
+      }
+    ]
+  },
+  {
+    "name": "Pasta",
+    "imageUrl": "https://example.com/images/pasta.png",
+    "description": "Italian pasta dishes with various sauces.",
+    "products": [
+      {
+        "name": "Spaghetti Carbonara",
+        "imageUrl": "https://example.com/images/carbonara.png",
+        "description": "Pasta with bacon, eggs, and cheese.",
+        "price": 11.99
+      },
+      {
+        "name": "Pesto Pasta",
+        "imageUrl": "https://example.com/images/pesto_pasta.png",
+        "description": "Pasta tossed in basil pesto sauce.",
+        "price": 10.99
+      },
+      {
+        "name": "Marinara Pasta",
+        "imageUrl": "https://example.com/images/marinara.png",
+        "description": "Pasta with tomato marinara sauce.",
+        "price": 9.99
+      }
+    ]
+  },
+  {
+    "name": "Indian",
+    "imageUrl": "https://example.com/images/indian_food.png",
+    "description": "Spicy and flavorful Indian dishes.",
+    "products": [
+      {
+        "name": "Butter Chicken",
+        "imageUrl": "https://example.com/images/butter_chicken.png",
+        "description": "Creamy tomato curry with chicken.",
+        "price": 13.99
+      },
+      {
+        "name": "Paneer Tikka",
+        "imageUrl": "https://example.com/images/paneer_tikka.png",
+        "description": "Grilled paneer with spices.",
+        "price": 12.99
+      },
+      {
+        "name": "Biryani",
+        "imageUrl": "https://example.com/images/biryani.png",
+        "description": "Fragrant rice dish with meat and spices.",
+        "price": 14.99
+      }
+    ]
+  }
+]
