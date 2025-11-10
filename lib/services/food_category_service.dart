@@ -8,7 +8,7 @@ class FoodCategoryService {
   Future<List<FoodCategory>> fetchCategories() async {
     final snapshot = await _firestore.collection('foodCategories').get();
     var items = snapshot.docs
-        .map((doc) => FoodCategory.fromJson(doc.id, doc.data()))
+        .map((doc) => FoodCategory.fromJson(doc.id, doc.data() as Map<String, dynamic>))
         .toList();
     return items;
   }

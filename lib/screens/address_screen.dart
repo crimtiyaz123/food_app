@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import '../models/cart_model.dart';
 
 class AddressScreen extends StatefulWidget {
-  const AddressScreen({super.key});
+  final bool autoPopulateFromFirestore;
+  
+  const AddressScreen({super.key, this.autoPopulateFromFirestore = true});
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -18,7 +22,7 @@ class _AddressScreenState extends State<AddressScreen> {
     _loadAddress();
   }
 
-  // ✅ Load current address from Firestore
+  // Load current address from Firestore
   Future<void> _loadAddress() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
@@ -33,7 +37,7 @@ class _AddressScreenState extends State<AddressScreen> {
     }
   }
 
-  // ✅ Save address to Firestore
+  // Save address to Firestore
   Future<void> _saveAddress() async {
     final user = FirebaseAuth.instance.currentUser;
     final address = _addressController.text.trim();
@@ -58,11 +62,15 @@ class _AddressScreenState extends State<AddressScreen> {
           .doc(user.uid)
           .set({'address': address}, SetOptions(merge: true));
 
+      // Also set the delivery address in cart model
+      final cartModel = Provider.of<CartModel>(context, listen: false);
+      cartModel.setDeliveryAddress(address);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Address updated successfully!")),
       );
 
-      Navigator.pop(context); // Go back to Settings
+      Navigator.pop(context, true); // Return true to indicate success
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Failed to update address: $e")),
@@ -76,6 +84,11 @@ class _AddressScreenState extends State<AddressScreen> {
       appBar: AppBar(
         title: const Text("Update Address"),
         backgroundColor: Colors.green,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

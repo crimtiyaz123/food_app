@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/food_category.dart';
 import '../models/product.dart';
+import '../models/cart_model.dart';
 import 'cart_screen.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -13,25 +15,39 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  Map<String, int> _cart = {};
+  Map<String, int> _selectedQuantities = {};
 
-  void _increment(Product product) {
+  void _incrementSelected(Product product) {
     setState(() {
-      _cart[product.name] = (_cart[product.name] ?? 0) + 1;
+      _selectedQuantities[product.name] = (_selectedQuantities[product.name] ?? 0) + 1;
     });
   }
 
-  void _decrement(Product product) {
+  void _decrementSelected(Product product) {
     setState(() {
-      if (_cart[product.name] != null && _cart[product.name]! > 1) {
-        _cart[product.name] = _cart[product.name]! - 1;
-      } else {
-        _cart.remove(product.name);
+      if (_selectedQuantities[product.name] != null && _selectedQuantities[product.name]! > 0) {
+        _selectedQuantities[product.name] = _selectedQuantities[product.name]! - 1;
       }
     });
   }
 
-  int _getQuantity(Product product) => _cart[product.name] ?? 0;
+  void _addToCart(Product product, int qty, BuildContext context) {
+    final cartModel = context.read<CartModel>();
+    for (int i = 0; i < qty; i++) {
+      cartModel.addItem(product);
+    }
+    setState(() {
+      _selectedQuantities[product.name] = 0;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${product.name} added to cart!')),
+    );
+  }
+
+  int _getCartQuantity(Product product) {
+    final cartModel = context.read<CartModel>();
+    return cartModel.items[product] ?? 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +55,11 @@ class _ProductScreenState extends State<ProductScreen> {
       appBar: AppBar(
         title: Text(widget.category.name),
         backgroundColor: Colors.orange,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         actions: [
           Stack(
             alignment: Alignment.center,
@@ -49,27 +70,33 @@ class _ProductScreenState extends State<ProductScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CartScreen(cart: _cart, products: widget.category.products),
+                      builder: (_) => const CartScreen(),
                     ),
                   );
                 },
               ),
-              if (_cart.isNotEmpty)
-                Positioned(
-                  right: 8,
-                  top: 8,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      _cart.length.toString(),
-                      style: const TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                  ),
-                ),
+              Consumer<CartModel>(
+                builder: (context, cartModel, child) {
+                  final itemCount = cartModel.items.length;
+                  if (itemCount > 0)
+                    return Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          itemCount.toString(),
+                          style: const TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      ),
+                    );
+                  return const SizedBox.shrink();
+                },
+              ),
             ],
           )
         ],
@@ -78,18 +105,33 @@ class _ProductScreenState extends State<ProductScreen> {
         itemCount: widget.category.products.length,
         itemBuilder: (context, index) {
           final product = widget.category.products[index];
-          final qty = _getQuantity(product);
+          final selectedQty = _selectedQuantities[product.name] ?? 0;
+          final cartQty = _getCartQuantity(product);
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListTile(
               leading: product.imageUrl != null
-                  ? Image.network(
-                      product.imageUrl!,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
+                  ? Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.network(
+                          product.imageUrl!,
+                          fit: BoxFit.cover,
+                          width: 80,
+                          height: 80,
+                        ),
+                      ),
                     )
-                  : CircleAvatar(child: Text(product.name[0])),
+                  : CircleAvatar(
+                      radius: 40,
+                      child: Text(product.name[0], style: TextStyle(fontSize: 24)),
+                    ),
               title: Text(product.name),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,29 +139,39 @@ class _ProductScreenState extends State<ProductScreen> {
                   Text(product.description ?? ''),
                   Text('\$${product.price.toStringAsFixed(2)}',
                       style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                  if (cartQty > 0)
+                    Text('In cart: $cartQty',
+                        style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
                 ],
               ),
-              trailing: qty == 0
-                  ? ElevatedButton(
-                      onPressed: () => _increment(product),
-                      child: const Text('Add +'),
+              trailing: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove),
+                        onPressed: selectedQty > 0 ? () => _decrementSelected(product) : null,
+                      ),
+                      Text(selectedQty.toString(), style: const TextStyle(fontSize: 16)),
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        onPressed: () => _incrementSelected(product),
+                      ),
+                    ],
+                  ),
+                  if (selectedQty > 0)
+                    ElevatedButton(
+                      onPressed: () => _addToCart(product, selectedQty, context),
+                      child: const Text('Add to Cart'),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orange),
-                    )
-                  : Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.remove_circle_outline),
-                          onPressed: () => _decrement(product),
-                        ),
-                        Text(qty.toString(), style: const TextStyle(fontSize: 16)),
-                        IconButton(
-                          icon: const Icon(Icons.add_circle_outline),
-                          onPressed: () => _increment(product),
-                        ),
-                      ],
+                        backgroundColor: Colors.orange,
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      ),
                     ),
+                ],
+              ),
             ),
           );
         },

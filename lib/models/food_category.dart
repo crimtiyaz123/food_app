@@ -18,8 +18,8 @@ class FoodCategory {
   factory FoodCategory.fromJson(String? id, Map<String, dynamic> json) {
     List<Product> products = [];
     if (json['products'] != null) {
-      products = (json['products'] as List)
-          .map((p) => Product.fromJson(null, p))
+      products = (json['products'] as List).asMap().entries
+          .map((entry) => Product.fromJson('${id}_${entry.key}', entry.value))
           .toList();
     }
     return FoodCategory(
@@ -40,13 +40,11 @@ class FoodCategory {
     };
   }
 
-  // Optional: Convert Firestore doc directly
-  factory FoodCategory.fromFirestore(
-      String id, Map<String, dynamic> data) {
+  factory FoodCategory.fromFirestore(String id, Map<String, dynamic> data) {
     List<Product> products = [];
     if (data['products'] != null) {
-      products = (data['products'] as List)
-          .map((p) => Product.fromJson(null, p))
+      products = (data['products'] as List).asMap().entries
+          .map((entry) => Product.fromJson('${id}_${entry.key}', entry.value))
           .toList();
     }
     return FoodCategory(

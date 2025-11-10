@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'profile/edit_profile_screen.dart'; // Import your EditProfileScreen
 import 'profile/change_password_screen.dart'; // Import ChangePasswordScreen
 import 'address_screen.dart'; // Import AddressScreen
+import 'favorites_screen.dart';
+import '../test_restaurant.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -68,6 +70,19 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(),
 
+          // My Favorites
+          ListTile(
+            leading: const Icon(Icons.favorite, color: Colors.red),
+            title: const Text("My Favorites"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const FavoritesScreen()),
+              );
+            },
+          ),
+          const Divider(),
+
           // ===== Address Section =====
           const SizedBox(height: 10),
           const Text(
@@ -88,6 +103,30 @@ class SettingsScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const AddressScreen()),
+              );
+            },
+          ),
+          const Divider(),
+
+          // ===== Development Section =====
+          const SizedBox(height: 10),
+          const Text(
+            "Development & Testing",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 5),
+
+          ListTile(
+            leading: const Icon(Icons.restaurant, color: Colors.purple),
+            title: const Text("Add Test Restaurant"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => TestRestaurantScreen()),
               );
             },
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/models/User.dart';
+import 'package:wazwaango/models/User.dart';
 import '../../../services/auth_service.dart';
 import '../../../widgets/custom_field.dart';
 import 'otp_verification_screen.dart';
@@ -87,7 +87,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           
       if (user != null && mounted) {
         // Update display name
-        await user.updateDisplayName(nameController.text.trim());
+        await user.updateDisplayName(name);
         if (mounted) {
           if (verifyPhone && phone.isNotEmpty) {
             // Navigate to OTP verification
@@ -101,7 +101,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Registration Successful!')),
             );
-            Navigator.pushReplacementNamed(context, '/login');
+            // AuthWrapper will handle navigation based on auth state
+            // No need to navigate manually
           }
         }
       }
@@ -157,135 +158,152 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Card(
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            children: [
+              // Back button at the top
+              Align(
+                alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Icon(Icons.restaurant, size: 60, color: Colors.green),
-                      const SizedBox(height: 10),
-                      const Text(
-                        'Food App Registration\n(Phone Optional)',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red),
-                      ),
-                      const SizedBox(height: 20),
-
-                      CustomTextField(
-                        controller: nameController,
-                        hintText: 'Full Name',
-                        keyboardType: TextInputType.name,
-                        prefixIcon: Icon(Icons.person, color: Colors.red),
-                      ),
-                      const SizedBox(height: 12),
-
-                      CustomTextField(
-                        controller: emailController,
-                        hintText: 'Email',
-                        keyboardType: TextInputType.emailAddress,
-                        prefixIcon: Icon(Icons.email, color: Colors.red),
-                      ),
-                      const SizedBox(height: 12),
-
-                      CustomTextField(
-                        controller: passwordController,
-                        hintText: 'Password',
-                        obscureText: true,
-                        keyboardType: TextInputType.visiblePassword,
-                        prefixIcon: Icon(Icons.lock, color: Colors.red),
-                      ),
-                      const SizedBox(height: 12),
-
-                      CustomTextField(
-                        controller: phoneController,
-                        hintText: verifyPhone
-                            ? 'Phone Number (e.g., +91XXXXXXXXXX)'
-                            : 'Phone Number (Optional)',
-                        keyboardType: TextInputType.phone,
-                        prefixIcon: Icon(Icons.phone, color: Colors.red),
-                      ),
-                      const SizedBox(height: 12),
-
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: verifyPhone,
-                            onChanged: phoneController.text.trim().isEmpty
-                                ? null
-                                : (value) {
-                                    setState(() {
-                                      verifyPhone = value ?? false;
-                                    });
-                                  },
-                            activeColor: Colors.red,
-                          ),
-                          Expanded(
-                            child: Text(
-                              phoneController.text.trim().isEmpty
-                                  ? 'Add phone number to enable OTP verification'
-                                  : 'Verify phone number with OTP (recommended)',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: phoneController.text.trim().isEmpty
-                                    ? Colors.grey
-                                    : Colors.black,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-
-                      isLoading
-                          ? const CircularProgressIndicator()
-                          : ElevatedButton(
-                              onPressed: signup,
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(double.infinity, 50),
-                                backgroundColor: Colors.red,
-                                foregroundColor: Colors.white,
-                              ),
-                              child: const Text('Register'),
-                            ),
-                      const SizedBox(height: 12),
-
-                      const SizedBox(height: 12),
-
-                      // Google Sign-In temporarily disabled due to package API changes
-                      // TODO: Re-enable when google_sign_in package stabilizes
-                      // isLoading
-                      //     ? const SizedBox()
-                      //     : ElevatedButton.icon(
-                      //         onPressed: signupWithGoogle,
-                      //         icon: Icon(Icons.g_mobiledata),
-                      //         label: const Text('Sign Up with Google'),
-                      //         style: ElevatedButton.styleFrom(
-                      //           backgroundColor: Colors.white,
-                      //           foregroundColor: Colors.black,
-                      //           minimumSize: const Size(double.infinity, 50),
-                      //         ),
-                      //       ),
-                      const SizedBox(height: 10),
-
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/login');
-                        },
-                        child: const Text('Already have an account? Login'),
-                      ),
-                    ],
+                  padding: const EdgeInsets.only(top: 40, left: 16),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.black),
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
               ),
-            ),
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            Icon(Icons.restaurant, size: 60, color: Colors.green),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'WazWaanGo Registration\n(Phone Optional)',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red),
+                            ),
+                            const SizedBox(height: 20),
+
+                            CustomTextField(
+                              controller: nameController,
+                              hintText: 'Full Name',
+                              keyboardType: TextInputType.name,
+                              prefixIcon: Icon(Icons.person, color: Colors.red),
+                            ),
+                            const SizedBox(height: 12),
+
+                            CustomTextField(
+                              controller: emailController,
+                              hintText: 'Email',
+                              keyboardType: TextInputType.emailAddress,
+                              prefixIcon: Icon(Icons.email, color: Colors.red),
+                            ),
+                            const SizedBox(height: 12),
+
+                            CustomTextField(
+                              controller: passwordController,
+                              hintText: 'Password',
+                              obscureText: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              prefixIcon: Icon(Icons.lock, color: Colors.red),
+                            ),
+                            const SizedBox(height: 12),
+
+                            CustomTextField(
+                              controller: phoneController,
+                              hintText: verifyPhone
+                                  ? 'Phone Number (e.g., +91XXXXXXXXXX)'
+                                  : 'Phone Number (Optional)',
+                              keyboardType: TextInputType.phone,
+                              prefixIcon: Icon(Icons.phone, color: Colors.red),
+                            ),
+                            const SizedBox(height: 12),
+
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: verifyPhone,
+                                  onChanged: phoneController.text.trim().isEmpty
+                                      ? null
+                                      : (value) {
+                                          setState(() {
+                                            verifyPhone = value ?? false;
+                                          });
+                                        },
+                                  activeColor: Colors.red,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    phoneController.text.trim().isEmpty
+                                        ? 'Add phone number to enable OTP verification'
+                                        : 'Verify phone number with OTP (recommended)',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: phoneController.text.trim().isEmpty
+                                          ? Colors.grey
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+
+                            isLoading
+                                ? const CircularProgressIndicator()
+                                : ElevatedButton(
+                                    onPressed: signup,
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: const Size(double.infinity, 50),
+                                      backgroundColor: Colors.red,
+                                      foregroundColor: Colors.white,
+                                    ),
+                                    child: const Text('Register'),
+                                  ),
+                            const SizedBox(height: 12),
+
+                            const SizedBox(height: 12),
+
+                            // Google Sign-In temporarily disabled due to package API changes
+                            // TODO: Re-enable when google_sign_in package stabilizes
+                            // isLoading
+                            //     ? const SizedBox()
+                            //     : ElevatedButton.icon(
+                            //         onPressed: signupWithGoogle,
+                            //         icon: Icon(Icons.g_mobiledata),
+                            //         label: const Text('Sign Up with Google'),
+                            //         style: ElevatedButton.styleFrom(
+                            //           backgroundColor: Colors.white,
+                            //           foregroundColor: Colors.black,
+                            //           minimumSize: const Size(double.infinity, 50),
+                            //         ),
+                            //       ),
+                            const SizedBox(height: 10),
+
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(context, '/login');
+                              },
+                              child: const Text('Already have an account? Login'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

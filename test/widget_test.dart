@@ -1,30 +1,110 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// Food Delivery App Widget Tests
+// Tests the main app navigation and basic functionality
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-import 'package:food_app/main.dart';
+import 'package:wazwaango/main.dart';
+import 'package:wazwaango/models/cart_model.dart';
+import 'package:wazwaango/main_navigation.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const FoodApp());
+  // Initialize Firebase for testing
+  setUpAll(() async {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'test-api-key',
+        appId: 'test-app-id',
+        messagingSenderId: 'test-sender-id',
+        projectId: 'test-project',
+      ),
+    );
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('Food App main navigation smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => CartModel()),
+        ],
+        child: const WazWaanGoApp(),
+      ),
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Verify that the app starts with restaurant tab selected
+    expect(find.text('Restaurants'), findsOneWidget);
+    expect(find.byType(BottomNavigationBar), findsOneWidget);
+    expect(find.byType(CartScreen), findsNothing);
+  });
+
+  testWidgets('Bottom navigation works correctly', (WidgetTester tester) async {
+    // Build our app and trigger a frame
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => CartModel()),
+        ],
+        child: const WazWaanGoApp(),
+      ),
+    );
+
+    // Start on Restaurants tab
+    expect(find.text('Food App'), findsOneWidget);
+    
+    // Tap on Favorites tab
+    await tester.tap(find.text('Favorites'));
     await tester.pump();
+    
+    // Should navigate to favorites
+    expect(find.text('Food App'), findsOneWidget);
+    
+    // Tap on Cart tab
+    await tester.tap(find.text('Cart'));
+    await tester.pump();
+    
+    // Should show cart
+    expect(find.text('Cart is empty'), findsOneWidget);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('Cart functionality works', (WidgetTester tester) async {
+    // Build our app and trigger a frame
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => CartModel()),
+        ],
+        child: const WazWaanGoApp(),
+      ),
+    );
+
+    // Navigate to cart
+    await tester.tap(find.text('Cart'));
+    await tester.pump();
+    
+    // Should show empty cart message
+    expect(find.text('Cart is empty'), findsOneWidget);
+  });
+
+  testWidgets('App theme and styling', (WidgetTester tester) async {
+    // Build our app
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => CartModel()),
+        ],
+        child: const WazWaanGoApp(),
+      ),
+    );
+
+    // Verify app theme
+    final appBar = find.byType(AppBar);
+    expect(appBar, findsOneWidget);
+    
+    // Verify navigation colors
+    final bottomNav = find.byType(BottomNavigationBar);
+    expect(bottomNav, findsOneWidget);
   });
 }

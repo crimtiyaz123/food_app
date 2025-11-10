@@ -1,16 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:food_app/models/User.dart';
-import 'package:food_app/services/firestore_service.dart';
+import 'package:wazwaango/models/User.dart';
+import 'package:wazwaango/services/firestore_service.dart';
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirestoreService _firestore = FirestoreService(collectionPath: 'users', fromMap: (data, documentId) => null);
+  final firebase_auth.FirebaseAuth _auth = firebase_auth.FirebaseAuth.instance;
+  final FirestoreService<User> _firestore = FirestoreService<User>(
+    collectionPath: 'users',
+    fromMap: (data, documentId) => User.fromJson(data, documentId),
+  );
 
   // ---------------- Email & Password ----------------
 
-  Future<User?> signUpWithEmail(RegistrationUser user) async {
+  Future<firebase_auth.User?> signUpWithEmail(RegistrationUser user) async {
     try {
       final result = await _auth.createUserWithEmailAndPassword(
         email: user.personalInfo.email,
@@ -21,7 +24,7 @@ class AuthService {
 
       return result.user;
 
-    } on FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('SignUp Error [${e.code}]: ${e.message}');
       return null;
 
@@ -31,14 +34,14 @@ class AuthService {
     }
   }
 
-  Future<User?> loginWithEmail(String email, String password) async {
+  Future<firebase_auth.User?> loginWithEmail(String email, String password) async {
     try {
       final result = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
       return result.user;
-    } on FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('Login Error [${e.code}]: ${e.message}');
       return null;
     } catch (e) {
@@ -54,7 +57,7 @@ class AuthService {
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('Password Reset Error [${e.code}]: ${e.message}');
     } catch (e) {
       debugPrint('Password Reset Error: $e');
@@ -82,10 +85,10 @@ class AuthService {
       String? verificationId;
       await _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) {
+        verificationCompleted: (firebase_auth.PhoneAuthCredential credential) {
           debugPrint('Auto verification completed');
         },
-        verificationFailed: (FirebaseAuthException e) {
+        verificationFailed: (firebase_auth.FirebaseAuthException e) {
           debugPrint('Verification failed: ${e.message}');
           throw e;
         },
@@ -105,15 +108,15 @@ class AuthService {
     }
   }
 
-  Future<User?> verifyOTP(String verificationId, String smsCode) async {
+  Future<firebase_auth.User?> verifyOTP(String verificationId, String smsCode) async {
     try {
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+      firebase_auth.PhoneAuthCredential credential = firebase_auth.PhoneAuthProvider.credential(
         verificationId: verificationId,
         smsCode: smsCode,
       );
       final result = await _auth.signInWithCredential(credential);
       return result.user;
-    } on FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('Verify OTP Error [${e.code}]: ${e.message}');
       return null;
     } catch (e) {
@@ -128,7 +131,7 @@ class AuthService {
       if (user == null || user.email == null) return false;
 
       // Re-authenticate with current password
-      final credential = EmailAuthProvider.credential(
+      final credential = firebase_auth.EmailAuthProvider.credential(
         email: user.email!,
         password: currentPassword,
       );
@@ -137,7 +140,7 @@ class AuthService {
       // Update password
       await user.updatePassword(newPassword);
       return true;
-    } on FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('Change Password Error [${e.code}]: ${e.message}');
       return false;
     } catch (e) {

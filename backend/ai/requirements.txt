@@ -1,0 +1,48 @@
+# AI and Machine Learning Libraries
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+scipy>=1.10.0
+
+# Deep Learning
+tensorflow>=2.13.0
+torch>=2.0.0
+transformers>=4.30.0
+
+# Natural Language Processing
+spacy>=3.6.0
+nltk>=3.8.1
+textblob>=0.17.1
+
+# Computer Vision and AR/VR
+opencv-python>=4.8.0
+pillow>=10.0.0
+pygame>=2.5.0
+
+# Voice Processing
+speech-recognition>=3.10.0
+pyaudio>=0.2.11
+librosa>=0.10.0
+
+# Database and Storage
+pymongo>=4.5.0
+redis>=4.6.0
+
+# HTTP and API
+requests>=2.31.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+
+# Utilities
+python-dateutil>=2.8.2
+pytz>=2023.3
+jsonschema>=4.19.0
+python-dotenv>=1.0.0
+
+# Data Processing
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+
+# Geospatial
+geopy>=2.3.0

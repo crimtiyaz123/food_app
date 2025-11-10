@@ -1,24 +1,24 @@
 [
   {
     "name": "Pizza",
-    "imageUrl": "https://example.com/images/pizza.png",
+    "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
     "description": "Delicious cheesy pizzas with various toppings.",
     "products": [
       {
         "name": "Margherita Pizza",
-        "imageUrl": "https://example.com/images/margherita.png",
+        "imageUrl": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop",
         "description": "Classic pizza with tomato sauce, mozzarella, and basil.",
         "price": 12.99
       },
       {
         "name": "Pepperoni Pizza",
-        "imageUrl": "https://example.com/images/pepperoni.png",
+        "imageUrl": "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop",
         "description": "Pizza topped with pepperoni and cheese.",
         "price": 14.99
       },
       {
         "name": "Vegetarian Pizza",
-        "imageUrl": "https://example.com/images/vegetarian.png",
+        "imageUrl": "https://images.unsplash.com/photo-1571066811602-716837d681de?w=400&h=300&fit=crop",
         "description": "Pizza loaded with fresh vegetables.",
         "price": 13.99
       }
@@ -26,24 +26,24 @@
   },
   {
     "name": "Burgers",
-    "imageUrl": "https://example.com/images/burger.png",
+    "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
     "description": "Juicy burgers made with fresh ingredients.",
     "products": [
       {
         "name": "Classic Burger",
-        "imageUrl": "https://example.com/images/classic_burger.png",
+        "imageUrl": "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop",
         "description": "Beef patty with lettuce, tomato, and cheese.",
         "price": 9.99
       },
       {
         "name": "Chicken Burger",
-        "imageUrl": "https://example.com/images/chicken_burger.png",
+        "imageUrl": "https://images.unsplash.com/photo-1551782450-17144efb5723?w=400&h=300&fit=crop",
         "description": "Grilled chicken patty with mayo and veggies.",
         "price": 10.99
       },
       {
         "name": "Veggie Burger",
-        "imageUrl": "https://example.com/images/veggie_burger.png",
+        "imageUrl": "https://images.unsplash.com/photo-1520072959219-c595dc870360?w=400&h=300&fit=crop",
         "description": "Plant-based patty with fresh toppings.",
         "price": 8.99
       }
@@ -51,24 +51,24 @@
   },
   {
     "name": "Sushi",
-    "imageUrl": "https://example.com/images/sushi.png",
+    "imageUrl": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=300&fit=crop",
     "description": "Fresh sushi rolls and sashimi.",
     "products": [
       {
         "name": "California Roll",
-        "imageUrl": "https://example.com/images/california_roll.png",
+        "imageUrl": "https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop",
         "description": "Crab, avocado, and cucumber roll.",
         "price": 8.99
       },
       {
         "name": "Salmon Nigiri",
-        "imageUrl": "https://example.com/images/salmon_nigiri.png",
+        "imageUrl": "https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop",
         "description": "Fresh salmon over seasoned rice.",
         "price": 7.99
       },
       {
         "name": "Tuna Sashimi",
-        "imageUrl": "https://example.com/images/tuna_sashimi.png",
+        "imageUrl": "https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop",
         "description": "Thin slices of fresh tuna.",
         "price": 12.99
       }
@@ -76,24 +76,24 @@
   },
   {
     "name": "Desserts",
-    "imageUrl": "https://example.com/images/dessert.png",
+    "imageUrl": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop",
     "description": "Cakes, pastries, and sweet treats.",
     "products": [
       {
         "name": "Chocolate Cake",
-        "imageUrl": "https://example.com/images/chocolate_cake.png",
+        "imageUrl": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop",
         "description": "Rich chocolate cake with frosting.",
         "price": 6.99
       },
       {
         "name": "Cheesecake",
-        "imageUrl": "https://example.com/images/cheesecake.png",
+        "imageUrl": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&h=300&fit=crop",
         "description": "Creamy cheesecake with berry topping.",
         "price": 7.99
       },
       {
         "name": "Ice Cream Sundae",
-        "imageUrl": "https://example.com/images/ice_cream.png",
+        "imageUrl": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&h=300&fit=crop",
         "description": "Vanilla ice cream with chocolate sauce.",
         "price": 5.99
       }
@@ -101,24 +101,24 @@
   },
   {
     "name": "Drinks",
-    "imageUrl": "https://example.com/images/drinks.png",
+    "imageUrl": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=300&fit=crop",
     "description": "Refreshing soft drinks and beverages.",
     "products": [
       {
         "name": "Coca Cola",
-        "imageUrl": "https://example.com/images/coke.png",
+        "imageUrl": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop",
         "description": "Classic cola drink.",
         "price": 2.99
       },
       {
         "name": "Orange Juice",
-        "imageUrl": "https://example.com/images/orange_juice.png",
+        "imageUrl": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=300&fit=crop",
         "description": "Freshly squeezed orange juice.",
         "price": 3.99
       },
       {
         "name": "Coffee",
-        "imageUrl": "https://example.com/images/coffee.png",
+        "imageUrl": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop",
         "description": "Hot brewed coffee.",
         "price": 2.49
       }
@@ -126,24 +126,24 @@
   },
   {
     "name": "Salads",
-    "imageUrl": "https://example.com/images/salad.png",
+    "imageUrl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop",
     "description": "Healthy and fresh salads.",
     "products": [
       {
         "name": "Caesar Salad",
-        "imageUrl": "https://example.com/images/caesar_salad.png",
+        "imageUrl": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=400&h=300&fit=crop",
         "description": "Romaine lettuce with Caesar dressing.",
         "price": 8.99
       },
       {
         "name": "Greek Salad",
-        "imageUrl": "https://example.com/images/greek_salad.png",
+        "imageUrl": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop",
         "description": "Mixed greens with feta and olives.",
         "price": 9.99
       },
       {
         "name": "Fruit Salad",
-        "imageUrl": "https://example.com/images/fruit_salad.png",
+        "imageUrl": "https://images.unsplash.com/photo-1490474418585-ba9afe8a0c68?w=400&h=300&fit=crop",
         "description": "Fresh seasonal fruits.",
         "price": 6.99
       }
@@ -151,24 +151,24 @@
   },
   {
     "name": "Pasta",
-    "imageUrl": "https://example.com/images/pasta.png",
+    "imageUrl": "https://images.unsplash.com/photo-1551892374-2e3e4e2e1c0c?w=400&h=300&fit=crop",
     "description": "Italian pasta dishes with various sauces.",
     "products": [
       {
         "name": "Spaghetti Carbonara",
-        "imageUrl": "https://example.com/images/carbonara.png",
+        "imageUrl": "https://images.unsplash.com/photo-1551892374-2e3e4e2e1c0c?w=400&h=300&fit=crop",
         "description": "Pasta with bacon, eggs, and cheese.",
         "price": 11.99
       },
       {
         "name": "Pesto Pasta",
-        "imageUrl": "https://example.com/images/pesto_pasta.png",
+        "imageUrl": "https://images.unsplash.com/photo-1551892374-2e3e4e2e1c0c?w=400&h=300&fit=crop",
         "description": "Pasta tossed in basil pesto sauce.",
         "price": 10.99
       },
       {
         "name": "Marinara Pasta",
-        "imageUrl": "https://example.com/images/marinara.png",
+        "imageUrl": "https://images.unsplash.com/photo-1551892374-2e3e4e2e1c0c?w=400&h=300&fit=crop",
         "description": "Pasta with tomato marinara sauce.",
         "price": 9.99
       }
@@ -176,24 +176,24 @@
   },
   {
     "name": "Indian",
-    "imageUrl": "https://example.com/images/indian_food.png",
+    "imageUrl": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop",
     "description": "Spicy and flavorful Indian dishes.",
     "products": [
       {
         "name": "Butter Chicken",
-        "imageUrl": "https://example.com/images/butter_chicken.png",
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae391?w=400&h=300&fit=crop",
         "description": "Creamy tomato curry with chicken.",
         "price": 13.99
       },
       {
         "name": "Paneer Tikka",
-        "imageUrl": "https://example.com/images/paneer_tikka.png",
+        "imageUrl": "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
         "description": "Grilled paneer with spices.",
         "price": 12.99
       },
       {
         "name": "Biryani",
-        "imageUrl": "https://example.com/images/biryani.png",
+        "imageUrl": "https://images.unsplash.com/photo-1563379091339-03246963d4d5?w=400&h=300&fit=crop",
         "description": "Fragrant rice dish with meat and spices.",
         "price": 14.99
       }

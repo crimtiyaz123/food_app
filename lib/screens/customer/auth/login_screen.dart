@@ -73,9 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
       final user = await authService.loginWithEmail(email, password);
       if (user != null && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login Successful')),
+          SnackBar(content: Text('Welcome to WazWaanGo! 🎉')),
         );
-        Navigator.pushReplacementNamed(context, '/');
+        // AuthWrapper will handle navigation based on auth state
+        // No need to navigate manually
       }
     } catch (e) {
       if (mounted) {
@@ -97,9 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
       final user = await authService.signInWithGoogle();
       if (user != null && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Google Sign-In Successful')),
+          SnackBar(content: Text('Welcome to WazWaanGo! 🎉')),
         );
-        Navigator.pushReplacementNamed(context, '/');
+        // AuthWrapper will handle navigation based on auth state
+        // No need to navigate manually
       }
     } catch (e) {
       if (mounted) {
@@ -116,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Color(0x80FFFFFF), // Semi-transparent white overlay
           image: DecorationImage(
             image: NetworkImage('https://www.precisionorthomd.com/wp-content/uploads/2023/10/percision-blog-header-junk-food-102323.jpg'),
@@ -124,117 +126,179 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Card(
-              elevation: 10,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-              children: [
-                Icon(Icons.restaurant, size: 60, color: Colors.green),
-                const SizedBox(height: 10),
-                const Text(
-                  'Food App Login',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.red),
-                ),
-                const SizedBox(height: 20),
-
-                if (!isPhoneLogin) ...[
-                  CustomTextField(
-                    controller: emailController,
-                    hintText: 'Email',
-                    keyboardType: TextInputType.emailAddress,
-                    prefixIcon: Icon(Icons.email, color: Colors.red),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              // Back button at the top
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 40, left: 16),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.black),
+                    onPressed: () => Navigator.pop(context),
                   ),
-                  const SizedBox(height: 12),
-
-                  CustomTextField(
-                    controller: passwordController,
-                    hintText: 'Password',
-                    obscureText: true,
-                    keyboardType: TextInputType.visiblePassword,
-                    prefixIcon: Icon(Icons.lock, color: Colors.red),
-                  ),
-                  const SizedBox(height: 12),
-                ] else ...[
-                  CustomTextField(
-                    controller: phoneController,
-                    hintText: 'Phone Number (e.g., +91XXXXXXXXXX)',
-                    keyboardType: TextInputType.phone,
-                    prefixIcon: Icon(Icons.phone, color: Colors.red),
-                  ),
-                  const SizedBox(height: 12),
-                ],
-
-
-                const SizedBox(height: 20),
-
-                isLoading
-                    ? const CircularProgressIndicator()
-                    : ElevatedButton(
-                        onPressed: login,
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: Text(isPhoneLogin ? 'Send OTP' : 'Login'),
-                      ),
-
-                const SizedBox(height: 12),
-
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      isPhoneLogin = !isPhoneLogin;
-                      emailController.clear();
-                      passwordController.clear();
-                      phoneController.clear();
-                    });
-                  },
-                  child: Text(
-                    isPhoneLogin ? 'Login with Email & Password' : 'Login with Phone OTP',
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ),
-
-
-                isLoading
-                    ? const SizedBox()
-                    : ElevatedButton.icon(
-                        onPressed: loginWithGoogle,
-                        label: const Text('Login with Google'),
-                        style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size(double.infinity, 50),
-                        ),
-                      ),
-                const SizedBox(height: 10),
-
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/forgot-password');
-                  },
-                  child: const Text('Forgot Password?'),
-                ),
-
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/registration');
-                  },
-                  child: const Text('Don\'t have an account? Register'),
-                ),
-              ],
                 ),
               ),
-            ),
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            // Custom logo container
+                            Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF2E7D32),
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xFF2E7D32).withValues(alpha: 0.3),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                Icons.restaurant_menu,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'WazWaanGo',
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF2E7D32),
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                            const Text(
+                              'Welcome Back!',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            // Subtitle
+                            const Text(
+                              'Your favorite food delivery app',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+
+                            if (!isPhoneLogin) ...[
+                              CustomTextField(
+                                controller: emailController,
+                                hintText: 'Email',
+                                keyboardType: TextInputType.emailAddress,
+                                prefixIcon: Icon(Icons.email, color: Colors.red),
+                              ),
+                              const SizedBox(height: 12),
+
+                              CustomTextField(
+                                controller: passwordController,
+                                hintText: 'Password',
+                                obscureText: true,
+                                keyboardType: TextInputType.visiblePassword,
+                                prefixIcon: Icon(Icons.lock, color: Colors.red),
+                              ),
+                              const SizedBox(height: 12),
+                            ] else ...[
+                              CustomTextField(
+                                controller: phoneController,
+                                hintText: 'Phone Number (e.g., +91XXXXXXXXXX)',
+                                keyboardType: TextInputType.phone,
+                                prefixIcon: Icon(Icons.phone, color: Colors.red),
+                              ),
+                              const SizedBox(height: 12),
+                            ],
+
+                            const SizedBox(height: 20),
+
+                            isLoading
+                                ? const CircularProgressIndicator()
+                                : ElevatedButton(
+                                    onPressed: login,
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: const Size(double.infinity, 50),
+                                      backgroundColor: Colors.green,
+                                      foregroundColor: Colors.white,
+                                    ),
+                                    child: Text(isPhoneLogin ? 'Send OTP' : 'Login'),
+                                  ),
+
+                            const SizedBox(height: 12),
+
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  isPhoneLogin = !isPhoneLogin;
+                                  emailController.clear();
+                                  passwordController.clear();
+                                  phoneController.clear();
+                                });
+                              },
+                              child: Text(
+                                isPhoneLogin ? 'Login with Email & Password' : 'Login with Phone OTP',
+                                style: const TextStyle(color: Colors.blue),
+                              ),
+                            ),
+
+                            const SizedBox(height: 12),
+
+                            isLoading
+                                ? const SizedBox()
+                                : ElevatedButton.icon(
+                                    onPressed: loginWithGoogle,
+                                    icon: const Icon(Icons.account_circle),
+                                    label: const Text('Login with Google'),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.blue,
+                                      foregroundColor: Colors.white,
+                                      minimumSize: const Size(double.infinity, 50),
+                                    ),
+                                  ),
+                            const SizedBox(height: 10),
+
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/forgot-password');
+                              },
+                              child: const Text('Forgot Password?'),
+                            ),
+
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/registration');
+                              },
+                              child: const Text('Don\'t have an account? Register'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      ),
       ),
     );
   }

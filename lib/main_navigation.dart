@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/settings_screen.dart';
+import 'screens/restaurant_list_screen.dart';
+import 'screens/favorites_screen.dart';
 
 // ===================== MAIN NAVIGATION =====================
 class MainNavigationScreen extends StatefulWidget {
@@ -15,8 +17,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   // ✅ Shared cart list
   final List<String> cartItems = [];
 
-  // Pages without MenuScreen
+  // Pages with restaurant browsing
   List<Widget> _pages() => [
+        const RestaurantListScreen(),
+        const FavoritesScreen(),
         const OrdersScreen(),
         CartScreen(cartItems: cartItems),
         const SettingsScreen(),
@@ -32,7 +36,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Food App'),
+        title: const Text('WazWaanGo'),
         backgroundColor: Colors.green,
       ),
       body: _pages()[_selectedIndex],
@@ -43,6 +47,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: 'Restaurants'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
           BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: 'Orders'),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),

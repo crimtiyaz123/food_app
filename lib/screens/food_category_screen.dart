@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/food_category.dart';
 import 'cart_screen.dart';
+import 'product_screen.dart';
 
 // FoodCategoryScreen
 class FoodCategoryScreen extends StatefulWidget {
@@ -67,7 +68,7 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CartScreen(cart: _cart, products: _categories.expand((c) => c.products).toList()),
+                      builder: (_) => const CartScreen(),
                     ),
                   );
                 },
@@ -102,6 +103,14 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
                 return Card(
                   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ProductScreen(category: category),
+                        ),
+                      );
+                    },
                     leading: category.imageUrl != null
                         ? Image.network(
                             category.imageUrl!,
@@ -111,6 +120,7 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
                           )
                         : CircleAvatar(child: Text(category.name[0])),
                     title: Text(category.name),
+                    subtitle: Text('${category.products.length} items'),
                     trailing: qty == 0
                         ? ElevatedButton(
                             onPressed: () => _increment(category),
